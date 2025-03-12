@@ -94,17 +94,6 @@ ipcMain.on('start-reporting', (event, url) => {
         "sl-SI,sl;q=0.9",
         "et-EE,et;q=0.9",
         "lv-LV,lv;q=0.9",
-        "lt-LT,lt;q=0.9",
-        "pl-PL,pl;q=0.9",
-        "hu-HU,hu;q=0.9",
-        "ro-RO,ro;q=0.9",
-        "hr-HR,hr;q=0.9",
-        "sr-RS,sr;q=0.9",
-        "bg-BG,bg;q=0.9",
-        "sk-SK,sk;q=0.9",
-        "sl-SI,sl;q=0.9",
-        "et-EE,et;q=0.9",
-        "lv-LV,lv;q=0.9",
         "lt-LT,lt;q=0.9"
     ];
 
