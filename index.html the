@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TikTok Reporter</title>
+
+    <style>
+
+        body {
+
+            background-color: black;
+
+            color: green;
+
+            font-family: 'Courier New', Courier, monospace;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            height: 100vh;
+
+            margin: 0;
+
+        }
+
+        #ascii-art {
+
+            font-size: 12pt;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+        }
+
+        #url-input, #output-box {
+
+            width: 80%;
+
+            margin-bottom: 10px;
+
+        }
+
+        #poison-button {
+
+            background-color: green;
+
+            color: black;
+
+            padding: 10px 20px;
+
+            border: none;
+
+            cursor: pointer;
+
+        }
+
+        #output-box {
+
+            height: 200px;
+
+            background-color: black;
+
+            color: green;
+
+            border: 1px solid green;
+
+            overflow-y: scroll;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="ascii-art">
+
+        ██▓███   ▒█████   ██▓  ██████  ▒█████   ███▄    █     ███▄ ▄███▓ ▄▄▄        ██████   ██████  ██▀███  ▓█████  ██▓███   ▒█████   ██▀███  ▄▄▄█████▓
+
+        ▓██░  ██▒▒██▒  ██▒▓██▒▒██    ▒ ▒██▒  ██▒ ██ ▀█   █    ▓██▒▀█▀ ██▒▒████▄    ▒██    ▒ ▒██    ▒ ▓██ ▒ ██▒▓█   ▀ ▓██░  ██▒▒██▒  ██▒▓██ ▒ ██▒▓  ██▒ ▓▒
+
+        ▓██░ ██▓▒▒██░  ██▒▒██▒░ ▓██▄   ▒██░  ██▒▓██  ▀█ ██▒   ▓██    ▓██░▒██  ▀█▄  ░ ▓██▄   ░ ▓██▄   ▓██ ░▄█ ▒▒███   ▓██░ ██▓▒▒██░  ██▒▓██ ░▄█ ▒▒ ▓██░ ▒░
+
+        ▒██▄█▓▒ ▒▒██   ██░░██░  ▒   ██▒▒██   ██░▓██▒  ▐▌██▒   ▒██    ▒██ ░██▄▄▄▄██   ▒   ██▒  ▒   ██▒▒██▀▀█▄  ▒▓█  ▄ ▒██▄█▓▒ ▒▒██   ██░▒██▀▀█▄  ░ ▓██▓ ░
+
+        ▒██▒ ░  ░░ ████▓▒░░██░▒██████▒▒░ ████▓▒░▒██░   ▓██░   ▒██▒   ░██▒ ▓█   ▓██▒▒██████▒▒▒██████▒▒░██▓ ▒██▒░▒████▒▒██▒ ░  ░░ ████▓▒░░██▓ ▒██▒  ▒██▒ ░
+
+        ▒▓▒░ ░  ░░ ▒░▒░▒░ ░▓  ▒ ▒▓▒ ▒ ░░ ▒░▒░▒░ ░ ▒░   ▒ ▒    ░ ▒░   ░  ░ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░▒ ▒▓▒ ▒ ░░ ▒▓ ░▒▓░░░ ▒░ ░▒▓▒░ ░  ░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░  ▒ ░░
+
+        ░▒ ░       ░ ▒ ▒░  ▒ ░░ ░▒  ░ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░   ░  ░      ░  ▒   ▒▒ ░░ ░▒  ░ ░░ ░▒  ░ ░  ░▒ ░ ▒░ ░ ░  ░░▒ ░       ░ ▒ ▒░   ░▒ ░ ▒░    ░
+
+        ░░       ░ ░ ░ ▒   ▒ ░░  ░  ░  ░ ░ ░ ▒     ░   ░ ░    ░      ░     ░   ▒   ░  ░  ░  ░  ░  ░    ░░   ░    ░   ░░       ░ ░ ░ ▒    ░░   ░   ░
+
+        ░░       ░ ░ ░ ▒   ▒ ░░  ░  ░  ░ ░ ░ ░           ░           ░         ░  ░      ░        ░     ░        ░  ░             ░ ░     ░
+
+    </div>
+
+    <input type="text" id="url-input" placeholder="Insert the Target URL from Inspect Element:">
+
+    <button id="poison-button">Poison Target</button>
+
+    <textarea id="output-box" readonly></textarea>
+
+
+
+    <script>
+
+        document.getElementById('poison-button').addEventListener('click', () => {
+
+            const url = document.getElementById('url-input').value;
+
+            document.getElementById('output-box').value = '';
+
+            if (url) {
+
+                window.electronAPI.startReporting(url);
+
+            } else {
+
+                document.getElementById('output-box').value = '[-] Please enter a valid target URL.';
+
+            }
+
+        });
+
+
+
+        window.electronAPI.onUpdateOutput((event, outputText) => {
+
+            document.getElementById('output-box').value += outputText + '\n';
+
+        });
+
+    </script>
+
+</body>
+
+</html>
