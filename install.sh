@@ -5,3 +5,5 @@ npm install axios electron
 
 
 npx electron .
+
+node report.js
