@@ -15,4 +15,6 @@ git clone https://github.com/hozoowhitehat/TIKTOK_BANNED_BYHOZOO
 
 cd TIKTOK_BANNED_BYHOZOO
 
+bash LAPOR.sh
+
 bash install.sh
